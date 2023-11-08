@@ -1,0 +1,37 @@
+function [H45, G] = calculateH45()
+    M = 512;
+    P1 = calculateP(1);
+    P2 = calculateP(2);
+    P3 = calculateP(3);
+    P4 = calculateP(4);
+    P5 = calculateP(5);
+    P6 = calculateP(6);
+    P7 = calculateP(7);
+    P8 = calculateP(8);
+    P9 = calculateP(9);
+    P10 = calculateP(10);
+    P11 = calculateP(11);
+    P12 = calculateP(12);
+    P13 = calculateP(13);
+    P14 = calculateP(14);
+    P15 = calculateP(15);
+    P16 = calculateP(16);
+    P17 = calculateP(17);
+    P18 = calculateP(18);
+    P19 = calculateP(19);
+    P20 = calculateP(20);
+    P21 = calculateP(21);
+    P22 = calculateP(22);
+    P23 = calculateP(23);
+    P24 = calculateP(24);
+    P25 = calculateP(25);
+    P26 = calculateP(26);
+    IM = eye(M);
+    ZM = zeros(M);
+    H45_FULL = [ZM ZM ZM ZM ZM ZM ZM ZM IM ZM xor(IM,P1);
+           xor(P21,xor(P22,P23)) IM xor(P15,xor(P16,P17)) IM xor(P9,xor(P10,P11)) IM IM IM ZM IM xor(P2,xor(P3,P4));
+           IM xor(P24,xor(P25,P26)) IM xor(P18,xor(P19,P20)) IM xor(P12,xor(P13,P14)) IM xor(P5,P6) ZM xor(P7,P8) IM];
+    H45 = H45_FULL(1:1024, 1:5120);
+    Parity_Transpose = H45(:,1:4096);
+    G = [eye(4096), Parity_Transpose'];
+end
